@@ -14,3 +14,9 @@ docs/storage/thumbs/.gitignore
 docs/storage/uploads/.gitignore
 docs/storage/styles/.gitignore
 public/html/*
+
+# VIM
+[._]*.s[a-v][a-z]
+[._]*.sw[a-p]
+[._]s[a-v][a-z]
+[._]sw[a-p]
