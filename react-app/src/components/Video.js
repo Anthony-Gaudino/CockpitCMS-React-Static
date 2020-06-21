@@ -21,7 +21,7 @@ export default ({ url, playing }) => (
       playing={playing || false}
       width="100%"
       height="100%"
-      youtubeConfig={{
+      youtube={{
         playerVars: {
           showinfo: 0,
           modestbranding: 1,

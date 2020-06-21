@@ -1,46 +1,34 @@
 import React from "react";
 //
-import {
-  Heading,
-  Text,
-  Divider,
-  CustomImage,
-  BigHero,
-  PageBanner,
-  SectionDivider,
-  LeafletMap,
-  Grid,
-  BlogPosts,
-  PageBannerMedia,
-  CodeBlock,
-  Form,
-  Video,
-  SubPages,
-  Button,
-  CustomCarousel,
-  Card,
-} from "./cockpit";
+const imports = [
+  'Heading',
+  'Text',
+  'Divider',
+  'CustomImage',
+  'BigHero',
+  'PageBanner',
+  'SectionDivider',
+  'LeafletMap',
+  'Grid',
+  'BlogPosts',
+  'PageBannerMedia',
+  'CodeBlock',
+  'Form',
+  'Video',
+  'SubPages',
+  'Button',
+  'CustomCarousel',
+  'Card',
+];
 
-const defaultComponents = {
-  heading: Heading,
-  text: Text,
-  divider: Divider,
-  customimage: CustomImage,
-  bighero: BigHero,
-  pagebanner: PageBanner,
-  sectiondivider: SectionDivider,
-  leafletmap: LeafletMap,
-  grid: Grid,
-  blogposts: BlogPosts,
-  pagebannermedia: PageBannerMedia,
-  codeblock: CodeBlock,
-  form: Form,
-  video: Video,
-  subpages: SubPages,
-  button: Button,
-  customcarousel: CustomCarousel,
-  card: Card,
-};
+const defaultComponents = {};
+
+// Dynamically import components to resolve circular dependency problems.
+import("./cockpit").then(m => {
+	for (const i of imports) {
+		defaultComponents[i.toLowerCase()] = m[i];
+	}
+});
 
 export default ({ components }) => (
   <div className="page--components">

@@ -1,6 +1,6 @@
 import React from "react";
 import convert from "htmr";
-import { NavLink } from "react-static";
+import { Link } from "@reach/router";
 import { Container } from "reactstrap";
 import styled from "styled-components";
 //
@@ -15,7 +15,7 @@ const ContainerStyled = styled(Container)`
 
 const transform = {
   img: node => <Image {...node} />,
-  a: node => <NavLink to={node.href} {...node} />,
+  a: node => <Link to={node.href} {...node} />,
 };
 
 export default ({ name, text }) => (

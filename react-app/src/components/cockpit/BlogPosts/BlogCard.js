@@ -1,6 +1,6 @@
 import React from "react";
 import { Card, CardImg, CardText, CardBody, CardTitle } from "reactstrap";
-import { NavLink } from "react-static";
+import { Link } from "@reach/router";
 import styled from "styled-components";
 //
 
@@ -57,7 +57,7 @@ const Zoom = styled.div`
   overflow: hidden;
 `;
 
-const NavLinkStyled = styled(NavLink)`
+const NavLinkStyled = styled(Link)`
   color: #444;
   font-weight: 200;
   :hover {

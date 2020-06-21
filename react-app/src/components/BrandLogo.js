@@ -1,8 +1,9 @@
 import React from "react";
 import styled from "styled-components";
-import { NavLink, SiteData } from "react-static";
+import { SiteData } from "react-static";
+import { Link } from "@reach/router";
 
-const NavLinkStyled = styled(NavLink)`
+const NavLinkStyled = styled(Link)`
   max-width: 200px;
   white-space: pre-wrap;
   font-size: 1.1rem;
@@ -26,7 +27,7 @@ const NavLinkStyled = styled(NavLink)`
 export default () => (
   <SiteData>
     {({ siteName }) => (
-      <NavLinkStyled exact to="/">
+      <NavLinkStyled to="/">
         <span>{siteName}</span>
       </NavLinkStyled>
     )}

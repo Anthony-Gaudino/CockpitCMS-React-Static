@@ -1,5 +1,5 @@
 import React from "react";
-import { NavLink } from "react-static";
+import { Link } from "@reach/router";
 import { Button } from "reactstrap";
 import styled from "styled-components";
 
@@ -49,7 +49,7 @@ export default ({ text, url, theme }) => {
   const Tag = theme === "dark" ? ButtonDarkStyled : ButtonLightStyled;
   return (
     <Tag outline color="primary">
-      {url && <NavLink to={url}>{text}</NavLink>}
+      {url && <Link to={url}>{text}</Link>}
     </Tag>
   );
 };

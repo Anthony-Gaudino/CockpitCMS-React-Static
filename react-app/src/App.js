@@ -1,21 +1,21 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 
-import React, { Fragment } from "react";
-import { Router } from "react-static";
-import { hot } from "react-hot-loader";
+import React from "react";
+import { Root, Routes } from "react-static";
 import { Container, Row, Col } from "reactstrap";
-import styled, { injectGlobal } from "styled-components";
+import styled, { createGlobalStyle } from "styled-components";
 //
-import Routes from "react-static-routes";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
+
+import { Link } from "@reach/router";
 
 const theme = {
   fontFamily: "Cabin, sans-serif",
   primaryColor: "rgb(41, 48, 132)",
 };
 
-injectGlobal`
+const GlobalStyle = createGlobalStyle`
   body {
     font-family: ${theme.fontFamily};
     font-weight: 300;
@@ -57,29 +57,36 @@ const MainRow = styled(Row)`
 `;
 
 const App = () => (
-  <Router>
-    <Fragment>
+  <Root>
+    <>
       <ContainerStyled fluid>
         <Row>
-          <Col>
-            <Header />
+         <Col>
+           <React.Suspense fallback={<div>Loading...</div>}>
+             <Header />
+           </React.Suspense>
           </Col>
         </Row>
         <MainRow>
           <Col>
             <main>
-              <Routes />
+              <React.Suspense fallback={<div>Loading...</div>}>
+                <Routes />
+              </React.Suspense>
             </main>
           </Col>
         </MainRow>
         <Row>
           <Col>
-            <Footer />
+            <React.Suspense fallback={<div>Loading...</div>}>
+              <Footer />
+            </React.Suspense>
           </Col>
         </Row>
       </ContainerStyled>
-    </Fragment>
-  </Router>
+      <GlobalStyle />
+    </>
+  </Root>
 );
 
-export default hot(module)(App);
+export default (App);

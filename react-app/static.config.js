@@ -38,8 +38,8 @@ export default {
       // Handle 404 route.
       if (page._id === settings.page404._id) {
         routes.push({
-          is404: true,
-          component: "src/pages/404",
+          path: `404`,
+          template: "src/pages/404",
           getData: () => ({
             page,
           }),
@@ -49,7 +49,7 @@ export default {
       // Handle any other internal page route.
       routes.push({
         path: `/${page.slug}`,
-        component: "src/pages/Page",
+        template: "src/pages/Page",
         lastModified: page._modified,
         getData: () => ({
           page,
@@ -63,7 +63,7 @@ export default {
         page.subpages.forEach(subpage => {
           routes.push({
             path: `/${page.slug}/${subpage.slug}`,
-            component: "src/pages/Page",
+            template: "src/pages/Page",
             lastModified: subpage._modified,
             getData: () => ({
               page,
@@ -80,7 +80,7 @@ export default {
     posts.forEach(post => {
       routes.push({
         path: `/blog/${post.slug}`,
-        component: "src/pages/Post",
+        template: "src/pages/Post",
         lastModified: post._modified,
         getData: () => ({
           post,
@@ -93,12 +93,32 @@ export default {
     // Handle preview route.
     routes.push({
       path: "/preview",
-      component: "src/pages/Preview",
+      template: "src/pages/Preview",
       getData: () => ({
         menuItems,
       }),
     });
 
+    // Uncomment to debug
+    /*
+    for (const route of routes) {
+        if (route.path === '/docs') {
+            console.log(route, route.getData())
+            //const data = route.getData();
+            //const components = data.page.components;
+            //const subpages = data.page.subpages;
+
+            ////for (const component of components) {
+            ////    console.log(component);
+            ////}
+
+
+            //for (const subpage of subpages) {
+            //    console.log(subpage);
+            //}
+        }
+    }
+    */
     return routes;
   },
   Document: ({ Html, Head, Body, children }) => (
@@ -114,4 +134,14 @@ export default {
       <Body>{children}</Body>
     </Html>
   ),
+  plugins: [
+    //[
+    //  require.resolve('react-static-plugin-source-filesystem'),
+    //  {
+    //    location: path.resolve('./src/pages'),
+    //  },
+    //],
+    require.resolve('react-static-plugin-reach-router'),
+    //require.resolve('react-static-plugin-sitemap'),
+  ],
 };

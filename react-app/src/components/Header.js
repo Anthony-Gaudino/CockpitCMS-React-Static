@@ -7,7 +7,8 @@ import {
   NavItem,
   Container,
 } from "reactstrap";
-import { NavLink, withRouteData } from "react-static";
+import { withRouteData } from "react-static";
+import { Link } from "@reach/router";
 import styled from "styled-components";
 //
 import BrandLogo from "./BrandLogo";
@@ -91,9 +92,9 @@ class Navigation extends React.Component {
                 (page, idx) =>
                   page.menu.includes("main") && (
                     <NavItem key={`menu-${idx}`}>
-                      <NavLink exact to={`/${page.slug}`}>
+                      <Link to={`/${page.slug}`}>
                         {page.title}
-                      </NavLink>
+                      </Link>
                     </NavItem>
                   )
               )}

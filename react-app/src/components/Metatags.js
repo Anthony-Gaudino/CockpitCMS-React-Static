@@ -1,8 +1,9 @@
 import React from "react";
-import { Head, withSiteData } from "react-static";
+import { Head, useSiteData } from "react-static";
 
-const Metatags = withSiteData(
-  ({ title, siteName, description, pageDescription }) => (
+const Metatags = () => {
+  const { title, siteName, description, pageDescription } = useSiteData();
+  return (
     <Head>
       <title>{`${title} | ${siteName}`}</title>
       <meta name="description" content={pageDescription || description} />
@@ -14,7 +15,7 @@ const Metatags = withSiteData(
       <meta property="og:title" content={title} />
       <meta property="og:site_name" content={siteName} />
     </Head>
-  )
-);
+  );
+}
 
 export default Metatags;

@@ -1,5 +1,5 @@
 import React from "react";
-import { withRouteData } from "react-static";
+import { useRouteData } from "react-static";
 import { Container, Row, Col } from "reactstrap";
 import styled from "styled-components";
 //
@@ -15,12 +15,15 @@ const RowInfo = styled(Row)`
   margin-bottom: 1rem;
 `;
 
-export default withRouteData(({ posts, info, max, cols, name }) => {
+export default () => {
+  const { posts, info, max, cols, name } = useRouteData();
+  let numCols = cols;
+
   if (max > 1) {
     posts = posts.slice(0, max);
   }
-  if (!cols) {
-    cols = 4;
+  if (!numCols) {
+    numCols = 4;
   }
   return (
     <ContainerStyled className={`component--${name}`}>
@@ -30,7 +33,7 @@ export default withRouteData(({ posts, info, max, cols, name }) => {
       <Row>
         {posts &&
           posts.map((post, idx) => (
-            <Col xs="12" md="6" lg={cols === 4 ? 3 : 4} key={`post-${idx}`}>
+            <Col xs="12" md="6" lg={numCols === 4 ? 3 : 4} key={`post-${idx}`}>
               <BlogCard
                 image={getImageStyleUrl("Card", post.image)}
                 title={post.title}
@@ -42,4 +45,4 @@ export default withRouteData(({ posts, info, max, cols, name }) => {
       </Row>
     </ContainerStyled>
   );
-});
+}

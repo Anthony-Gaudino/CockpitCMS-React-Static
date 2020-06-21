@@ -1,5 +1,5 @@
 import React from "react";
-import { NavLink, withRouteData, SiteData } from "react-static";
+import { NavLink, useRouteData, SiteData } from "react-static";
 import { Container, Row, Col } from "reactstrap";
 import convert from "htmr";
 import styled from "styled-components";
@@ -37,31 +37,34 @@ const RowCopyright = styled(Row)`
   }
 `;
 
-export default withRouteData(({ pages }) => (
-  <FooterStyles role="banner">
-    <Container fluid>
-      <RowNav>
-        <Col>
-          <nav>
-            {pages &&
-              pages.map(
-                (page, idx) =>
-                  page.menu.includes("footer") && (
-                    <NavLink key={`menu-${idx}`} exact to={`/${page.slug}`}>
-                      {page.title}
-                    </NavLink>
-                  )
-              )}
-          </nav>
-        </Col>
-      </RowNav>
-      <RowCopyright>
-        <Col>
-          <SiteData>
-            {({ copyright }) => <div>{convert(copyright)}</div>}
-          </SiteData>
-        </Col>
-      </RowCopyright>
-    </Container>
-  </FooterStyles>
-));
+export default () => {
+  const { pages } = useRouteData();
+  return (
+    <FooterStyles role="banner">
+      <Container fluid>
+        <RowNav>
+          <Col>
+            <nav>
+              {pages &&
+                pages.map(
+                  (page, idx) =>
+                    page.menu.includes("footer") && (
+                      <NavLink key={`menu-${idx}`} exact to={`/${page.slug}`}>
+                        {page.title}
+                      </NavLink>
+                    )
+                )}
+            </nav>
+          </Col>
+        </RowNav>
+        <RowCopyright>
+          <Col>
+            <SiteData>
+              {({ copyright }) => <div>{convert(copyright)}</div>}
+            </SiteData>
+          </Col>
+        </RowCopyright>
+      </Container>
+    </FooterStyles>
+  )
+}

@@ -1,7 +1,7 @@
 import React from "react";
 import { Container, Breadcrumb, BreadcrumbItem } from "reactstrap";
 import styled from "styled-components";
-import { NavLink } from "react-static";
+import { Link } from "@reach/router";
 
 const BreadcrumbStyled = styled(Breadcrumb)`
   .breadcrumb {
@@ -34,9 +34,9 @@ export default ({ crumbs }) => (
     <Container>
       <BreadcrumbStyled>
         <BreadcrumbItem>
-          <NavLink exact to="/">
+          <Link to="/">
             Home
-          </NavLink>
+          </Link>
         </BreadcrumbItem>
         {crumbs &&
           crumbs.map((crumb, idx) => (
@@ -45,9 +45,9 @@ export default ({ crumbs }) => (
               active={crumb.active || false}
             >
               {crumb.link && (
-                <NavLink exact to={crumb.link}>
+                <Link to={crumb.link}>
                   {crumb.text}
-                </NavLink>
+                </Link>
               )}
               {crumb.active && crumb.text}
             </BreadcrumbItem>

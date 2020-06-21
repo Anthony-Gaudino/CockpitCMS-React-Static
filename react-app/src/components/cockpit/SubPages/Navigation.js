@@ -1,6 +1,7 @@
 import React from "react";
-import { withRouteData, NavLink } from "react-static";
+import { useRouteData } from "react-static";
 import { Nav, NavItem } from "reactstrap";
+import { Link } from "@reach/router";
 import styled from "styled-components";
 //
 const NavStyled = styled(Nav)`
@@ -15,7 +16,7 @@ const NavStyled = styled(Nav)`
   }
 `;
 
-const NavLinkStyled = styled(NavLink)`
+const NavLinkStyled = styled(Link)`
   color: rgb(100, 100, 100);
   font-size: 1rem;
 
@@ -29,20 +30,23 @@ const NavLinkStyled = styled(NavLink)`
   }
 `;
 
-export default withRouteData(({ page, match }) => (
-  <NavStyled
-    vertical
-    className={match.url === `/${(page && page.slug) || ""}` && "none-active"}
-  >
-    {page &&
-      page.slug &&
-      page.subpages &&
-      page.subpages.map((subpage, idx) => (
-        <NavItem key={`submenu-${idx}`}>
-          <NavLinkStyled exact to={`/${page.slug}/${subpage.slug}`}>
-            {subpage.title}
-          </NavLinkStyled>
-        </NavItem>
-      ))}
-  </NavStyled>
-));
+export default () => {
+  const { page, posts } = useRouteData()
+  return (
+    <NavStyled
+      vertical
+      className={posts.url === `/${(page && page.slug) || ""}` && "none-active"}
+    >
+      {page &&
+        page.slug &&
+        page.subpages &&
+        page.subpages.map((subpage, idx) => (
+          <NavItem key={`submenu-${idx}`}>
+            <NavLinkStyled to={`/${page.slug}/${subpage.slug}`}>
+              {subpage.title}
+            </NavLinkStyled>
+          </NavItem>
+        ))}
+    </NavStyled>
+  )
+}
